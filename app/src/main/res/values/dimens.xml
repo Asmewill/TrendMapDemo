@@ -14,7 +14,7 @@
     <dimen name="trend_content_text_size">14dp</dimen>
     <dimen name="trend_corner_text_size">14dp</dimen>
     <dimen name="trend_ball_radius">12dp</dimen>
-    <dimen name="trend_sulcus_width">6dp</dimen>
+    <dimen name="trend_sulcus_width">0dp</dimen>
     <dimen name="trend_sulcus_height">6dp</dimen>
     <dimen name="trend_sulcus_bottom">9dp</dimen>
     <dimen name="trend_time_height">26dp</dimen>

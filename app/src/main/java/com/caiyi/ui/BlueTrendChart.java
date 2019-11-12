@@ -41,8 +41,8 @@ public class BlueTrendChart extends ATrendChart {
         this.mPaint.setTextAlign(Align.CENTER);
     }
 
-    public void setBlueCount(int count){
-        this.blueCount=count;
+    public void setBlueCount(int count) {
+        this.blueCount = count;
     }
 
     public void updateData(String str, ArrayList<TrendData> arrayList) {
@@ -58,11 +58,7 @@ public class BlueTrendChart extends ATrendChart {
             this.mPathPoint.reset();
             this.mScaleRange = new float[]{0.0f, 2.0f};
             if ("01".equals(this.mLotteryType)) {
-                //修改此处控制绘制蓝色球  红色球
-//                this.redCount = 0;
-//                this.blueCount = 16;
                 this.redCount = 0;
-//                this.blueCount = 16;
                 for (int i = 0; i < arrayList.size(); i++) {
                     TrendData trendData = (TrendData) arrayList.get(i);
                     if ("row".equals(trendData.getType())) {
@@ -80,9 +76,7 @@ public class BlueTrendChart extends ATrendChart {
                         }
                     }
                 }
-            }
-
-            else if ("50".equals(this.mLotteryType)) {
+            } else if ("50".equals(this.mLotteryType)) {
                 this.redCount = 35;
                 this.blueCount = 12;
             }
@@ -108,6 +102,7 @@ public class BlueTrendChart extends ATrendChart {
 
     /**
      * 设置蓝色球是否连线
+     *
      * @param z
      */
     public void setDrawLine(boolean z) {
@@ -122,6 +117,10 @@ public class BlueTrendChart extends ATrendChart {
         }
     }
 
+    /***
+     * 设置是否显示其他数字
+     * @param z
+     */
     public void setShowYilou(boolean z) {
         if ((this.mShowYilou != z ? 1 : null) != null) {
             this.mShowYilou = z;
@@ -164,71 +163,33 @@ public class BlueTrendChart extends ATrendChart {
     }
 
 
-
     /**
-     * 绘制最左边Y轴
+     * 绘制最左边Y轴期号
      */
     public void drawY() {
         if (this.mTrendData != null && this.mTrendData.size() >= 4) {
-            Canvas beginRecording = this.mPicY.beginRecording(this.mYItemWidth, (this.mYItemHeight * this.mTrendData.size()) + this.mDivHeight);
+            Canvas beginRecording = this.mPicY.beginRecording(this.mYItemWidth, (this.mYItemHeight * this.mTrendData.size()));//设置画布的宽高
             this.mPaint.setStyle(Style.FILL);
             int size = this.mTrendData.size();
             for (int i = 0; i < size; i++) {
-                int i2 = i * this.mYItemHeight;
-                //绘制出现次数和号码列表之间的GAP
-               /* if (i == size - 1) {
-                    this.mRect.set(0, this.mYItemHeight * i, this.mYItemWidth, (this.mYItemHeight * i) + this.mDivHeight);
-                    this.mPaint.setColor(-1);
-                    beginRecording.drawRect(this.mRect, this.mPaint);
-                    this.mPaint.setColor(this.mCDiv);
-                    beginRecording.drawLine(0.0f, (float) i2, (float) this.mYItemWidth, (float) i2, this.mPaint);
-                    beginRecording.drawLine(0.0f, (float) ((this.mDivHeight + i2) - 1), (float) this.mYItemWidth, (float) ((this.mDivHeight + i2) - 1), this.mPaint);
-                    this.mRect.set(0, this.mDivHeight + i2, this.mYItemWidth, (this.mYItemHeight + i2) + this.mDivHeight);
-                }
-
-                else if (i > size - 1) {
-                    this.mRect.set(0, this.mDivHeight + i2, this.mYItemWidth, (this.mYItemHeight + i2) + this.mDivHeight);
-                }
-                else {*/
-                    this.mRect.set(0, i2, this.mYItemWidth, this.mYItemHeight + i2);
-               // }
+                int i2 = i * this.mYItemHeight;//累加高度
+                this.mRect.set(0, i2, this.mYItemWidth, this.mYItemHeight + i2);//递增式设置每一期期号的正方形范围
                 String type = ((TrendData) this.mTrendData.get(i)).getType();
                 if (type.equals("row")) {
                     type = ((TrendData) this.mTrendData.get(i)).getPid();
                     if (i % 2 == 0) {
-                        this.mPaint.setColor(this.mCOddY);
+                        this.mPaint.setColor(this.mCOddY);//画布白灰背景
                     } else {
-                        this.mPaint.setColor(this.mCEvenY);
+                        this.mPaint.setColor(this.mCEvenY);//画布深灰背景
                     }
                     beginRecording.drawRect(this.mRect, this.mPaint);
-                    this.mPaint.setColor(this.mCYText);
-                }
-
-                else if (type.equals("dis")) {
+                    this.mPaint.setColor(this.mCYText);//设置绘制文字的颜色为黑色
+                } else if (type.equals("dis")) {
                     type = "出现次数";
-                    this.mPaint.setColor(-1);
+                    this.mPaint.setColor(-1);//画布白色
                     beginRecording.drawRect(this.mRect, this.mPaint);
-                    this.mPaint.setColor(this.mCApCount);
-                }
-
-              /*  else if (type.equals("avg")) {
-                    type = "平均遗漏";
-                    this.mPaint.setColor(this.mCAvgYilouBg);
-                    beginRecording.drawRect(this.mRect, this.mPaint);
-                    this.mPaint.setColor(this.mCAvgYilou);
-                } else if (type.equals("mmv")) {
-                    type = "最大遗漏";
-                    this.mPaint.setColor(-1);
-                    beginRecording.drawRect(this.mRect, this.mPaint);
-                    this.mPaint.setColor(this.mCMaxYilou);
-                } else if (type.equals("mlv")) {
-                    type = "最大连出";
-                    this.mPaint.setColor(this.mCLianchuBg);
-                    beginRecording.drawRect(this.mRect, this.mPaint);
-                    this.mPaint.setColor(this.mCLianchu);
-                }*/
-
-                else {
+                    this.mPaint.setColor(this.mCApCount);//设置绘制文字的颜色为蓝色
+                } else {
                     type = "??";
                 }
                 this.mPaint.setTextSize((float) this.mYTextSize);
@@ -237,25 +198,6 @@ public class BlueTrendChart extends ATrendChart {
             }
             this.mPicY.endRecording();
         }
-    }
-
-    /**
-     * 绘制预选取
-     */
-    public void drawLeftBottom() {
-        int i = this.mXItemHeight + this.mBottomMargin;
-        Canvas beginRecording = this.mPicLeftBottom.beginRecording(this.mYItemWidth, i);
-        this.mPaint.setStyle(Style.FILL);
-        this.mPaint.setColor(-1);
-        this.mRect.set(0, 0, this.mYItemWidth, i);
-        beginRecording.drawRect(this.mRect, this.mPaint);
-        this.mPaint.setColor(this.mCDiv);
-        beginRecording.drawLine(0.0f, 2.0f, (float) this.mYItemWidth, 2.0f, this.mPaint);
-        this.mPaint.setColor(ViewCompat.MEASURED_STATE_MASK);
-        this.mPaint.setTextSize((float) this.mLcTextSize);
-        this.mRect.set(0, this.mBottomMargin, this.mYItemWidth, i);
-        drawText2Rect("预选区", beginRecording, this.mRect, this.mPaint);
-        this.mPicLeftBottom.endRecording();
     }
 
     /**
@@ -277,7 +219,7 @@ public class BlueTrendChart extends ATrendChart {
      * 绘制x轴TOP
      */
     public void drawXTop() {
-       int i;
+        int i;
         int i2 = this.mDivWidth + (this.mXItemWidth * (this.redCount + this.blueCount));
         int i3 = this.mXItemHeight;
         Canvas beginRecording = this.mPicXTop.beginRecording(i2, i3);
@@ -286,9 +228,6 @@ public class BlueTrendChart extends ATrendChart {
         this.mPaint.setColor(this.mCXTitleBg);
         beginRecording.drawRect(this.mRect, this.mPaint);
         //绘制蓝色球01前面的空隙
-//        this.mPaint.setColor(-1);
-//        this.mRect.set(this.redCount * this.mXItemWidth, 0, (this.redCount * this.mXItemWidth) + this.mDivWidth, i3);
-//        beginRecording.drawRect(this.mRect, this.mPaint);
         this.mPaint.setTextSize((float) this.mLcTextSize);
         for (i = 1; i <= this.redCount; i++) {
             String str;
@@ -320,6 +259,99 @@ public class BlueTrendChart extends ATrendChart {
         this.mPicXTop.endRecording();
     }
 
+
+
+    /**
+     * 绘制内容
+     */
+    public void drawContent() {
+        int i;
+        int i2 = (this.mXItemWidth * (this.redCount + this.blueCount)) + this.mDivWidth;//总宽度
+        Canvas beginRecording = this.mPicContent.beginRecording(i2, (this.mYItemHeight * this.mTrendData.size()) + this.mDivHeight);
+        this.mPaint.setTextSize((float) this.mCTextSize);
+        this.mPaint.setStyle(Style.FILL);
+        int i3 = this.redCount + this.blueCount;
+        int size = this.mTrendData.size();
+        //绘制X轴轴线,绘制白灰上下交错的画布
+        for (i = 0; i <= size; i++) {
+            int i4 = i * this.mXItemHeight;
+            if (i != size) {
+                this.mRect.set(0, i4, i2, this.mXItemHeight + i4);
+                if (i % 2 == 0) {
+                    this.mPaint.setColor(-1);//设置画布背景白色
+                } else {
+                    this.mPaint.setColor(this.mCOddContent);//设置画布背景灰色
+                }
+                beginRecording.drawRect(this.mRect, this.mPaint);
+                this.mPaint.setColor(this.mCXbottomTextRed);
+                beginRecording.drawLine(0.0f, (float) i4, (float) i2, (float) i4, this.mPaint);//Y轴不变画X轴横线
+            }
+        }
+        //  绘制Y轴轴线
+        int size2 = this.mTrendData.size() * this.mXItemWidth;//总宽度
+        for (i = 0; i <= i3; i++) {
+            int i5 = i * this.mXItemWidth;//逐渐累加的宽度
+            if (i == this.redCount) {
+                this.mPaint.setColor(this.mCXbottomTextBlue);
+                beginRecording.drawLine((float) i5, 0.0f, (float) i5, (float) size2, this.mPaint);//绘制第一条Y轴轴线
+            } else if (i < this.redCount) {
+                this.mPaint.setColor(this.mCDiv);
+                beginRecording.drawLine((float) i5, 0.0f, (float) i5, (float) size2, this.mPaint);
+            } else {
+                this.mPaint.setColor(this.mCAvgYilou);
+                beginRecording.drawLine((float) (this.mDivWidth + i5), 0.0f, (float) (this.mDivWidth + i5), (float) size2, this.mPaint);//绘制第二条以后的Y轴轴线
+            }
+        }
+        i = (size - 4) * this.mXItemHeight;
+        this.mPaint.setColor(-1);
+        this.mRect.set(0, i, i2, this.mDivHeight + i);
+        //绘制二球之间的连接线
+        if ("01".equals(this.mLotteryType) && this.mDrawLine) {
+            this.mPaint.setStyle(Style.STROKE);
+            this.mPaint.setColor(this.mCXbottomTextRed);
+            beginRecording.drawPath(this.mPathPoint, this.mPaint);
+            this.mPaint.setStyle(Style.FILL);
+        }
+        i = this.mTrendData.size();
+        this.mPaint.setStyle(Style.FILL);
+        for (int i6 = 0; i6 < i; i6++) {
+            int i7;
+            String str;
+            TrendData trendData = (TrendData) this.mTrendData.get(i6);
+            String[] split2 = trendData.getBlue().split(",");
+            int i8 = this.mXItemHeight * i6;//Y轴高度逐渐累加
+            //画蓝球
+            for (i7 = 0; i7 < split2.length; i7++) {
+
+                this.mRect.set(((i7) * this.mXItemWidth) + this.mDivWidth, i8, (((i7) + 1) * this.mXItemWidth) + this.mDivWidth, this.mXItemHeight + i8);//设定画球的区域正方形
+                if (!"row".equals(trendData.getType())) {//画出现次数
+                    this.mPaint.setColor(ViewCompat.MEASURED_STATE_MASK);
+                    drawText2Rect(split2[i7], beginRecording, this.mRect, this.mPaint);
+                } else if (split2[i7].equals("0")) {//画篮球
+                    this.mPaint.setColor(this.mCBallBlue);
+                    beginRecording.drawCircle(this.mRect.exactCenterX(), (float) this.mRect.centerY(), (float) this.mDefBallSize, this.mPaint);//画圆形
+                    this.mPaint.setColor(-1);//白色
+                    if (i7 < 9) {
+                        str = "0" + (i7 + 1);
+                    } else {
+                        str = "" + (i7 + 1);
+                    }
+                    drawText2Rect(str, beginRecording, this.mRect, this.mPaint);//画篮球中间的白色数字
+                } else if (this.mShowYilou) {//画其他数字
+                    this.mPaint.setColor(this.mCXbottomTextRed);
+                    drawText2Rect(split2[i7], beginRecording, this.mRect, this.mPaint);
+                }
+            }
+        }
+        this.mPicContent.endRecording();
+    }
+
+    protected CharSequence getKuaiPingLeftTime() {
+        return null;
+    }
+
+
+    /////////////////////////////////////////////  NO  USE   /////////////////////////////////////////
     /**
      * 绘制底部预选区内容
      */
@@ -384,141 +416,21 @@ public class BlueTrendChart extends ATrendChart {
     }
 
     /**
-     * 绘制内容
+     * 绘制预选取
      */
-    public void drawContent() {
-        int i;
-        int i2 = (this.mXItemWidth * (this.redCount + this.blueCount)) + this.mDivWidth;
-        Canvas beginRecording = this.mPicContent.beginRecording(i2, (this.mYItemHeight * this.mTrendData.size()) + this.mDivHeight);
-        this.mPaint.setTextSize((float) this.mCTextSize);
+    public void drawLeftBottom() {
+        int i = this.mXItemHeight + this.mBottomMargin;
+        Canvas beginRecording = this.mPicLeftBottom.beginRecording(this.mYItemWidth, i);
         this.mPaint.setStyle(Style.FILL);
-        int i3 = this.redCount + this.blueCount;
-        int size = this.mTrendData.size();
-        //画横线
-
-       for (i = 0; i <= size; i++) {
-
-
-               int i4 = i * this.mXItemHeight;
-               if (i != size) {
-//                   if (i < size - 4) {
-                       this.mRect.set(0, i4, i2, this.mXItemHeight + i4);
-                       if (i % 2 == 0) {
-                           this.mPaint.setColor(-1);
-                       } else {
-                           this.mPaint.setColor(this.mCOddContent);
-                       }
-                       beginRecording.drawRect(this.mRect, this.mPaint);
-                       this.mPaint.setColor(this.mCDiv);
-                       beginRecording.drawLine(0.0f, (float) i4, (float) i2, (float) i4, this.mPaint);
-//                   } else {
-//                       this.mRect.set(0, this.mDivHeight + i4, i2, (i4 + this.mDivHeight) + this.mXItemHeight);
-//                       if (i == (size - 4) + 1) {
-//                           this.mPaint.setColor(this.mCAvgYilouBg);
-//                       } else if (i == size - 1) {
-//                           this.mPaint.setColor(this.mCLianchuBg);
-//                       } else {
-//                           this.mPaint.setColor(-1);
-//                       }
-//                       beginRecording.drawRect(this.mRect, this.mPaint);
-//                   }
-               }
-        }
-        int size2 = this.mTrendData.size() * this.mXItemWidth;
-        for (i = 0; i <= i3; i++) {
-            int i5 = i * this.mXItemWidth;
-            if (i == this.redCount) {
-                //绘制空隙
-//                this.mPaint.setColor(-1);
-//                this.mRect.set(i5, 0, this.mDivWidth + i5, size2);
-//                beginRecording.drawRect(this.mRect, this.mPaint);
-                this.mPaint.setColor(this.mCDiv);
-                beginRecording.drawLine((float) i5, 0.0f, (float) i5, (float) size2, this.mPaint);
-//                beginRecording.drawLine((float) (this.mDivWidth + i5), 0.0f, (float) (this.mDivWidth + i5), (float) size2, this.mPaint);
-            } else if (i < this.redCount) {
-                this.mPaint.setColor(this.mCDiv);
-                beginRecording.drawLine((float) i5, 0.0f, (float) i5, (float) size2, this.mPaint);
-            } else {
-                this.mPaint.setColor(this.mCDiv);
-                beginRecording.drawLine((float) (this.mDivWidth + i5), 0.0f, (float) (this.mDivWidth + i5), (float) size2, this.mPaint);
-            }
-        }
-        i = (size - 4) * this.mXItemHeight;
         this.mPaint.setColor(-1);
-        this.mRect.set(0, i, i2, this.mDivHeight + i);
-        //绘制双色球区域和出现次数之间的空隙
-//        beginRecording.drawRect(this.mRect, this.mPaint);
-//        this.mPaint.setColor(this.mCDiv);
-//        beginRecording.drawLine(0.0f, (float) i, (float) i2, (float) i, this.mPaint);
-//        beginRecording.drawLine(0.0f, (float) ((this.mDivHeight + i) - 1), (float) i2, (float) ((this.mDivHeight + i) - 1), this.mPaint);
-        if ("01".equals(this.mLotteryType) && this.mDrawLine) {
-            this.mPaint.setStyle(Style.STROKE);
-            this.mPaint.setColor(this.mCBallBlue);
-            beginRecording.drawPath(this.mPathPoint, this.mPaint);
-            this.mPaint.setStyle(Style.FILL);
-        }
-        i = this.mTrendData.size();
-        this.mPaint.setStyle(Style.FILL);
-        for (int i6 = 0; i6 < i; i6++) {
-            int i7;
-            String str;
-            TrendData trendData = (TrendData) this.mTrendData.get(i6);
-//            String[] split = trendData.getRed().split(",");
-            String[] split2 = trendData.getBlue().split(",");
-            int i8 = this.mXItemHeight * i6;
-            //设置最后四行的位置偏移量
-//            if (i6 >= i - 4) {
-//                i8 += this.mDivHeight;
-//            }
-            //画红球
-         /*   for (i7 = 0; i7 < split.length; i7++) {
-                this.mRect.set(this.mXItemWidth * i7, i8, (i7 + 1) * this.mXItemWidth, this.mXItemHeight + i8);
-                if (!"row".equals(trendData.getType())) {
-                    this.mPaint.setColor(ViewCompat.MEASURED_STATE_MASK);
-                    drawText2Rect(split[i7], beginRecording, this.mRect, this.mPaint);
-                } else if (split[i7].equals("0")) {
-
-                    this.mPaint.setColor(this.mCBallRed);
-                    beginRecording.drawCircle(this.mRect.exactCenterX(), (float) this.mRect.centerY(), (float) this.mDefBallSize, this.mPaint);
-                    this.mPaint.setColor(-1);
-                    if (i7 < 9) {
-                        str = "0" + (i7 + 1);
-                    } else {
-                        str = "" + (i7 + 1);
-                    }
-                    drawText2Rect(str, beginRecording, this.mRect, this.mPaint);
-                } else if (this.mShowYilou) {
-                    this.mPaint.setColor(this.mCYilou);
-                    drawText2Rect(split[i7], beginRecording, this.mRect, this.mPaint);
-                }
-            }*/
-            //画蓝球
-            for (i7 = 0; i7 < split2.length; i7++) {
-
-                this.mRect.set((( i7) * this.mXItemWidth) + this.mDivWidth, i8, (((i7) + 1) * this.mXItemWidth) + this.mDivWidth, this.mXItemHeight + i8);
-                if (!"row".equals(trendData.getType())) {
-                    this.mPaint.setColor(ViewCompat.MEASURED_STATE_MASK);
-                    drawText2Rect(split2[i7], beginRecording, this.mRect, this.mPaint);
-                } else if (split2[i7].equals("0")) {
-                    this.mPaint.setColor(this.mCBallBlue);
-                    beginRecording.drawCircle(this.mRect.exactCenterX(), (float) this.mRect.centerY(), (float) this.mDefBallSize, this.mPaint);
-                    this.mPaint.setColor(-1);
-                    if (i7 < 9) {
-                        str = "0" + (i7 + 1);
-                    } else {
-                        str = "" + (i7 + 1);
-                    }
-                    drawText2Rect(str, beginRecording, this.mRect, this.mPaint);
-                } else if (this.mShowYilou) {
-                    this.mPaint.setColor(this.mCYilou);
-                    drawText2Rect(split2[i7], beginRecording, this.mRect, this.mPaint);
-                }
-            }
-        }
-        this.mPicContent.endRecording();
-    }
-
-    protected CharSequence getKuaiPingLeftTime() {
-        return null;
+        this.mRect.set(0, 0, this.mYItemWidth, i);
+        beginRecording.drawRect(this.mRect, this.mPaint);
+        this.mPaint.setColor(this.mCDiv);
+        beginRecording.drawLine(0.0f, 2.0f, (float) this.mYItemWidth, 2.0f, this.mPaint);
+        this.mPaint.setColor(ViewCompat.MEASURED_STATE_MASK);
+        this.mPaint.setTextSize((float) this.mLcTextSize);
+        this.mRect.set(0, this.mBottomMargin, this.mYItemWidth, i);
+        drawText2Rect("预选区", beginRecording, this.mRect, this.mPaint);
+        this.mPicLeftBottom.endRecording();
     }
 }

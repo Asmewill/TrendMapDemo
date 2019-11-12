@@ -120,7 +120,7 @@ public class LottoTrendView extends View implements OnDoubleTapListener, OnGestu
                 }
                 postInvalidate();
             }
-            this.mChart.draw(canvas, (int) this.mNowX, (int) this.mNowY, getWidth(), getHeight(), this.mScale);
+            this.mChart.drawMyView(canvas, (int) this.mNowX, (int) this.mNowY, getWidth(), getHeight(), this.mScale);
         }
     }
 

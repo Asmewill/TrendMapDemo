@@ -142,12 +142,12 @@ public abstract class ATrendChart implements ITrendChart {
             drawLeftTop();
             //绘制左边的期号
             drawY();
-            //绘制预算区点击内容
-            drawXBottom();
+            //绘制预选区点击内容
+         //   drawXBottom();
             //绘制内容
             drawContent();
-            //绘制预算区几个字
-            drawLeftBottom();
+            //绘制预选区几个字
+           // drawLeftBottom();
             setInitPosition();
         }
     }
@@ -163,7 +163,7 @@ public abstract class ATrendChart implements ITrendChart {
         }
     }
 
-    public void draw(Canvas canvas, int i, int i2, int i3, int i4, float f) {
+    public void drawMyView(Canvas canvas, int i, int i2, int i3, int i4, float f) {
         if (i3 > 0 && i4 > 0 ) {
             CharSequence kuaiPingLeftTime = getKuaiPingLeftTime();
             int width = (int) (((float) this.mPicY.getWidth()) * f);
@@ -217,15 +217,15 @@ public abstract class ATrendChart implements ITrendChart {
             int height3 = this.mPicXBottom.getHeight();
             Object obj = getKuaiPingLeftTime() != null ? 1 : null;
             this.mCanScroll[1] = ((float) ((height2 + height3) + height)) * f > ((float) i2);
-            this.mScrollRange[2] = (int) (((float) i2) - (((float) ((obj != null ? this.mTimeHeight : 0) + (height3 + height))) * f));
-            this.mScrollRange[3] = (int) (((float) height2) * f);
+            this.mScrollRange[2] = (int) (((float) i2) - (((float) ((obj != null ? this.mTimeHeight : 0) + (height3 + height))) * f));//-2614
+            this.mScrollRange[3] = (int) (((float) height2) * f);//91
             float f2 = (((float) i2) * 1.0f) / ((float) ((height2 + height3) + height));
             if (f2 > this.mScaleRange[0]) {
                 this.mScaleRange[0] = f2;
             }
             this.mCanScroll[0] = ((float) (width + width2)) * f > ((float) i);
-            this.mScrollRange[0] = (int) (((float) i) - (((float) width2) * f));
-            this.mScrollRange[1] = (int) (((float) width) * f);
+            this.mScrollRange[0] = (int) (((float) i) - (((float) width2) * f));//-376
+            this.mScrollRange[1] = (int) (((float) width) * f);//165
             f2 = (((float) i) * 1.0f) / ((float) (width + width2));
             if (f2 > this.mScaleRange[0]) {
                 this.mScaleRange[0] = f2;

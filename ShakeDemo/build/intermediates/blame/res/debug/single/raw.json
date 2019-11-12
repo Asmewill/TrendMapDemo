@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\build\\intermediates\\res\\merged\\debug\\raw\\location.mp3",
+        "source": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\src\\main\\res\\raw\\location.mp3"
+    },
+    {
+        "merged": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\build\\intermediates\\res\\merged\\debug\\raw\\rotate.mp3",
+        "source": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\src\\main\\res\\raw\\rotate.mp3"
+    },
+    {
+        "merged": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\build\\intermediates\\res\\merged\\debug\\raw\\coin.mp3",
+        "source": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\src\\main\\res\\raw\\coin.mp3"
+    },
+    {
+        "merged": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\build\\intermediates\\res\\merged\\debug\\raw\\pop_sound.mp3",
+        "source": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\src\\main\\res\\raw\\pop_sound.mp3"
+    }
+]

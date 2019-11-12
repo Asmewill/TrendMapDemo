@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 public interface ITrendChart {
-    void draw(Canvas canvas, int i, int i2, int i3, int i4, float f);
+    void drawMyView(Canvas canvas, int i, int i2, int i3, int i4, float f);
 
     boolean getCanScale();
 
