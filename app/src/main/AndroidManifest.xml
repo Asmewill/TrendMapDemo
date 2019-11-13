@@ -20,7 +20,8 @@
 
         </activity>
         <activity android:name="com.caiyi.lottery.LottoTrendActivity1">
-
+        </activity>
+        <activity android:name="com.caiyi.lottery.LotteryTrendActivity2">
         </activity>
     </application>
 

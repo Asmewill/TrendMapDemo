@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.caiyi.lottery.LotteryTrendActivity2;
 import com.caiyi.lottery.LottoTrendActivity;
 import com.caiyi.lottery.LottoTrendActivity1;
 
@@ -28,6 +29,12 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LottoTrendActivity1.class));
+            }
+        });
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LotteryTrendActivity2.class));
             }
         });
 

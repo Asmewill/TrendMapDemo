@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\AndroidTestSpace\\CaiPiaoTrend\\LotteryDev\\TrendMapDemo\\ShakeDemo\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
+        "source": "E:\\AndroidTestSpace\\CaiPiaoTrend\\LotteryDev\\TrendMapDemo\\ShakeDemo\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
         "merged": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
         "source": "E:\\AndroidTestSpace\\CaiPiaoTrend\\lotterytrend\\ShakeDemo\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     }
